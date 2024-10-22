@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'C:/Users/Saathwik/Desktop/Projects/attendance-tracker/src/firebase.js';
+import { auth } from '../firebase.js';
 import { Link, useNavigate } from 'react-router-dom';
 import  Spinner  from 'react-bootstrap/Spinner';
 function Register(){
