@@ -1,24 +1,23 @@
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import ContainerFluid from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
+import { Link } from 'react-router-dom';
 
-
-function MyNavbar(){
-    return(
-        <>
-        <Navbar className='bg-dark text-white'>
-            <ContainerFluid>
-                <Navbar.Brand className='text-white'>Attendance</Navbar.Brand>
-                <Nav className='me-auto justify-content-center '>
-                    <Nav.Link className='text-white'>Tracker</Nav.Link>
-                    <Nav.Link className='text-white justify-content-end' >Login</Nav.Link>
-                    <Nav.Link className='text-white justify-content-end' >Signup</Nav.Link>
-                </Nav>
-            </ContainerFluid>
-        </Navbar>
-        
-        </>
-    );
+function myNavBar() {
+  return (
+    <>
+      <Navbar bg="dark" variant="dark" className='nav-bar'>
+        <Navbar.Brand as={Link} to="/" className='nav-bar-brand'>Attendance</Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link as={Link} to="/" className='nav-bar-home'>Home</Nav.Link>
+        </Nav>
+        <Nav>
+          <Nav.Link as={Link} to="/login" className='nav-bar-login'>Login</Nav.Link>
+          <Nav.Link as={Link} to="/register" className='nav-bar-register'>Register</Nav.Link>
+        </Nav>
+      </Navbar>
+    </>
+  );
 }
 
-export default MyNavbar;
+export default myNavBar

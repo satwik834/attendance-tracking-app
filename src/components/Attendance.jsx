@@ -2,6 +2,8 @@ import Container from 'react-bootstrap/Container';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { useEffect } from 'react';
 
 function Attendance(){
@@ -181,80 +183,90 @@ function updateTotalsDirectly() {
     alert("Totals updated successfully!");
 }
 
-
-    return(
-    <>
-        <Container  className='tracker-container bg-white'>
-            <p className='tracker-title'> Attendance Tracker</p>
-
+return (
+    <Container fluid>
+      <Row>
+        <Col md={6}>
+          <Container className='tracker-container bg-white'>
+            <p className='tracker-title'>Attendance Tracker</p>
             <Form>
+              <Form.Group>
                 <Form.Label>No. of classes attended today</Form.Label>
                 <Form.Control 
-                    className='input-form' 
-                    type="number"
-                    value={attendanceToday} 
-                    onChange={handleAttendanceChange} />
-                
+                  className='input-form' 
+                  type="number"
+                  value={attendanceToday} 
+                  onChange={handleAttendanceChange} 
+                />
+              </Form.Group>
+              
+              <Form.Group>
                 <Form.Label>Total classes Today</Form.Label>
                 <Form.Control 
-                    type='number' 
-                    className='input-form'
-                    value={totalToday} 
-                    onChange={handleTotalTodayChange} />
-                
-                <Button className='btn btn-dark' onClick={updateAttendance}>Update Attendance</Button>
+                  type='number' 
+                  className='input-form'
+                  value={totalToday} 
+                  onChange={handleTotalTodayChange} 
+                />
+              </Form.Group>
+              
+              <Button className='btn btn-dark mt-2' onClick={updateAttendance}>Update Attendance</Button>
             </Form>
-
-
-
-            <Container className='info-container'>
-                <p className='info-text'>Today's Attendance</p>
-                {updated ? (
-                    <div>
-                        <p>Attended: {displayedAttendanceToday}</p>
-                        <p>Total: {displayedTotalToday}</p>
-                    </div>
-                ) : (
-                    <p>No attendance recorded for today.</p>
-                )}
-            </Container>
-
-            <Container className='info-container'>
-                <p className='info-text'>Cumulative Attendance</p>
+            <Container className='info-container mt-3'>
+              <p className='info-text'>Today's Attendance</p>
+              {updated ? (
                 <div>
-                    <p>Total classes Attended:{attendedClasses} </p>
-                    <p>Total classes held: {totalClasses}</p>
-                    <p>Percentage: {(attendedClasses/totalClasses)*100}</p>
-                    
+                  <p>Attended: {displayedAttendanceToday}</p>
+                  <p>Total: {displayedTotalToday}</p>
                 </div>
+              ) : (
+                <p>No attendance recorded for today.</p>
+              )}
             </Container>
-
-            <Button className='btn btn-dark' onClick={resetAttendance}>Reset Attendance</Button>
-
-        </Container>
-        <Container className='tracker-container mt-4'>
-                <p className='info-text'>Edit Totals Directly</p>
-                <Form>
-                    <Form.Label>Total Classes Attended</Form.Label>
-                    <Form.Control 
-                        className='input-form' 
-                        type="number"
-                        value={editTotalAttended} 
-                        onChange={handleEditTotalAttendedChange} />
-                    
-                    <Form.Label>Total Classes Held</Form.Label>
-                    <Form.Control 
-                        type='number' 
-                        className='input-form'
-                        value={editTotalHeld} 
-                        onChange={handleEditTotalHeldChange} />
-                    
-                    <Button className='btn btn-warning mt-2' onClick={updateTotalsDirectly}>Update Totals Directly</Button>
-                </Form>
-        </Container>
+            <Container className='info-container mt-3'>
+              <p className='info-text'>Cumulative Attendance</p>
+              <div>
+                <p>Total classes Attended: {attendedClasses}</p>
+                <p>Total classes held: {totalClasses}</p>
+                <p>Percentage: {((attendedClasses / totalClasses) * 100).toFixed(2)}%</p>
+              </div>
+            </Container>
+            <Button className='btn btn-dark mt-3' onClick={resetAttendance}>Reset Attendance</Button>
+          </Container>
+        </Col>
         
-    </>
-    );
+        <Col>
+          <Container className='tracker-container bg-white h-50'>
+            <p className='info-text'>Edit Totals Directly</p>
+            <Form>
+              <Form.Group>
+                <Form.Label>Total Classes Attended</Form.Label>
+                <Form.Control 
+                  className='input-form' 
+                  type="number"
+                  value={editTotalAttended} 
+                  onChange={handleEditTotalAttendedChange} 
+                />
+              </Form.Group>
+              
+              <Form.Group>
+                <Form.Label>Total Classes Held</Form.Label>
+                <Form.Control 
+                  type='number' 
+                  className='input-form'
+                  value={editTotalHeld} 
+                  onChange={handleEditTotalHeldChange} 
+                />
+              </Form.Group>
+              
+              <Button className='btn btn-warning mt-3' onClick={updateTotalsDirectly}>Update Totals Directly</Button>
+            </Form>
+          </Container>
+        </Col>
+      </Row>
+    </Container>
+  );
+
 }
 
 export default Attendance;
