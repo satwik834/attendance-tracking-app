@@ -226,6 +226,7 @@ return (
             <Container className='info-container mt-3'>
               <p className='info-text'>Cumulative Attendance</p>
               <div>
+                <p>Last Updated:{localStorage.getItem('lastUpdated')}</p>
                 <p>Total classes Attended: {attendedClasses}</p>
                 <p>Total classes held: {totalClasses}</p>
                 <p>Percentage: {((attendedClasses / totalClasses) * 100).toFixed(2)}%</p>
