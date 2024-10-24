@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase.js';
 import { Link, useNavigate } from 'react-router-dom';
 import  Spinner  from 'react-bootstrap/Spinner';
+import { useFirebase } from '../contexts/Firebase.jsx';
 function Register(){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -12,6 +13,8 @@ function Register(){
     const [confirmPassword,setConfirmPassword] = useState(" ");
     const [notice,setNotice] = useState("");
     const [loading,setLoading] = useState(false);
+
+    const firebase = useFirebase();
 
     function handleEmailChange(event){
         setEmail(e => event.target.value);
@@ -24,20 +27,18 @@ function Register(){
 ;    }
 
     const signupWithUsernameAndPassword = async (e) => {
-
-
         if(password === confirmPassword){
             try{
                 setLoading(true);
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user  = userCredential.user;
-                console.log(user);
+                const userCredential = await firebase.signupUserWithEmailAndPassword(email,password);
                 setLoading(false);
-                setNotice("Account Created")
+                console.log(userCredential)
+                setNotice("account created");
             }
-            catch{
-                setNotice("Something went wrong, please fuck off");
+            catch(error){
+                console.log("logged by register compoenent"+error)
                 setLoading(false);
+                setNotice("something went wrong, please fuck off");
             }
         }
         else{
@@ -64,11 +65,14 @@ function Register(){
                 </Form.Label>
                 <Form.Control onChange={handleConfirmPasswordChange} className='dark-input no-glow mb-4'  type='password'  />
             </Form.Group>
+            <div className='text-center'>
             <Button onClick={signupWithUsernameAndPassword} className='btn-dark signin-btn'>
                 {loading? 
                 <Spinner animation = "border" variant='light'size='sm'/>
                 :"Sign Up"}
             </Button>
+
+            </div>
             <p>{notice}</p>
         </Form>
 

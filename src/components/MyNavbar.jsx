@@ -3,9 +3,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
+
+
 function myNavBar() {
   return (
     <>
+
       <Navbar bg="dark" variant="dark" className='nav-bar'>
         <Navbar.Brand as={Link} to="/" className='nav-bar-brand'>Attendance</Navbar.Brand>
         <Nav className="me-auto">
@@ -13,7 +16,6 @@ function myNavBar() {
         </Nav>
         <Nav>
           <Nav.Link as={Link} to="/login" className='nav-bar-login'>Login</Nav.Link>
-          <Nav.Link as={Link} to="/register" className='nav-bar-register'>Register</Nav.Link>
         </Nav>
       </Navbar>
     </>

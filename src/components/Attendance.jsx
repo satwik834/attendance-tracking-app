@@ -236,7 +236,7 @@ return (
         </Col>
         
         <Col>
-          <Container className='tracker-container bg-white h-50'>
+          <Container className='tracker-container bg-white h-50 w-50'>
             <p className='info-text'>Edit Totals Directly</p>
             <Form>
               <Form.Group>
