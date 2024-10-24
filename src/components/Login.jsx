@@ -41,6 +41,21 @@ function Login(){
             setIsLoading(false);
         }
     }
+
+    const continueWithGoogle = async() =>{
+        try{
+            setIsGoogleLoading(true);
+            const userCredential = await firebase.signupWithGoogle();
+            setIsGoogleLoading(false);
+            setNotice(userCredential.user.displayName + " Logged in")
+            console.log(notice)
+
+            navigate("/")
+        }catch(error){
+            console.log("error logged by continue with google: " + error)
+            setIsGoogleLoading(false)
+        }
+    }
     return (        
     <div className="credential-box">
         <h1 className='mb-5'>Sign in</h1>
@@ -67,10 +82,9 @@ function Login(){
                     <Button className='btn btn-light signin-btn w-100'onClick={() => navigate('/register')}>Register</Button>
                 </Col>
             </Row>
-            <p>{notice}</p>
             <br></br>
             <div className='text-center'>
-                <Button  className='btn-dark signin-with-google w-100'>
+                <Button  className='btn-dark signin-with-google w-100' onClick={continueWithGoogle}>
                     {isGoogleLoading? 
                     <Spinner animation = "border" variant='light'size='sm'/>
                     :"Continue with Google"}
